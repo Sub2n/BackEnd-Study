@@ -14,3 +14,11 @@ Node.js 공부
 - __dirname 사용
 - static directory 설정
 
+#### 19.10.02 (수))
+
+**2. Request,Response 처리 기본**
+
+- POST 요청 처리
+
+- Express의 View engine으로 ejs 템플릿 사용해서 render해서 응답함
+- Ajax 요청에 대한 처리
