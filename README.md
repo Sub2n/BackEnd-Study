@@ -21,4 +21,4 @@ Node.js 공부
 - POST 요청 처리
 
 - Express의 View engine으로 ejs 템플릿 사용해서 render해서 응답함
-- Ajax 요청에 대한 처리
+- Ajax 요청에 대한 처리 !
