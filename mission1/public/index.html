@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>중간 과제 (1)</title>
+    <style>
+      div {
+        margin: 0 auto;
+        text-align: center;
+      }
+      .search {
+        min-width: 50vw;
+        padding: 5px 5px 5px 10px;
+      }
+      .submit {
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input class="search" type="text" />
+      <button class="submit">검색</button>
+      <div class="result"></div>
+    </div>
+    <script>
+      const $input = document.querySelector('.search');
+      const $submit = document.querySelector('.submit');
+
+      function sendAjax(url, data) {
+        const body = {
+          query: data,
+        };
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(body));
+
+        xhr.addEventListener('load', function() {
+          const { result, answer } = JSON.parse(xhr.responseText);
+          if (result !== 'ok') return;
+          document.querySelector(
+            '.result'
+          ).innerHTML = `<h1>${answer}를 검색하셨네요~</h1>`;
+        });
+      }
+
+      $input.addEventListener('keyup', function(e) {
+        if (e.keyCode !== 13 || !e.target.value.trim()) return;
+        else sendAjax('http://127.0.0.1:3000/search', e.target.value);
+        $input.value = '';
+      });
+
+      $submit.addEventListener('click', function() {
+        sendAjax('http://127.0.0.1:3000/search', $input.value);
+        $input.value = '';
+      });
+    </script>
+  </body>
+</html>

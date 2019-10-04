@@ -25,12 +25,14 @@ app.get('/index.html', function (req, res) {
 })
 
 // localhost:3000/email_post로의 post 요청에 대한 응답 처리
+// Server에서 ejs rendering을 해서 보내주는 방식? 
 app.post('/email_post', function (req, res) {
   res.render('email.ejs', {
     'email': req.body.email
   })
 })
 
+// json으로 응답해서 client에서 정보를 사용해 다시 그리는 방법으로, 화면 깜빡임 없음
 app.post('/ajax_send_email', function (req, res) {
   const responseData = {
     'result': 'ok',
