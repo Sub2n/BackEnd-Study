@@ -1,6 +1,17 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const mysql = require('mysql')
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'wktnqls2!',
+  database: 'jsman'
+})
+
+connection.connect()
 
 app.listen(3000, function () {
   console.log('start! express server on port 3000');
@@ -34,9 +45,18 @@ app.post('/email_post', function (req, res) {
 
 // json으로 응답해서 client에서 정보를 사용해 다시 그리는 방법으로, 화면 깜빡임 없음
 app.post('/ajax_send_email', function (req, res) {
-  const responseData = {
-    'result': 'ok',
-    'email': req.body.email
-  }
-  res.json(responseData)
+  const email = req.body.email;
+  let responseData = {};
+
+  const query = connection.query(`SELECT name FROM user WHERE email="${email}"`, function (err, rows) {
+    if (err) throw err;
+    if (rows[0]) {
+      responseData.result = 'ok';
+      responseData.name = rows[0].name;
+    } else {
+      responseData.result = 'none';
+      responseData.name = '';
+    }
+    res.json(responseData)
+  })
 })

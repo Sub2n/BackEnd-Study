@@ -23,15 +23,17 @@
           email: input,
         };
         const xhr = new XMLHttpRequest();
+
         xhr.open('POST', url);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
+
         xhr.addEventListener('load', function() {
-          const { result, email } = JSON.parse(xhr.responseText);
-          if (result !== 'ok') return;
-          document.querySelector(
-            '.result'
-          ).innerHTML = `<h1>Server Responsed for AJAX Request!</h1><h1>Welcome ${email}</h1>`;
+          const { result, name } = JSON.parse(xhr.responseText);
+          const resultDiv = document.querySelector('.result');
+          if (result !== 'ok') {
+            resultDiv.innerHTML = 'Your Email Not Found';
+          } else resultDiv.innerHTML = `<h1>Welcome ${name}</h1>`;
         });
       }
     </script>
