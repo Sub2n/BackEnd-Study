@@ -17,8 +17,21 @@ const connection = mysql.createConnection({
 connection.connect()
 
 router.get('/', function (req, res) {
-  console.log('get join url');
   res.sendFile(path.join(__dirname, '../../public/join.html'))
 })
+
+router.post('/', function (req, res) {
+  const body = req.body;
+  const email = body.email;
+  const name = body.name;
+  const password = body.password;
+  console.log(email, name, password);
+
+  const query = connection.query(`INSERT INTO user (email, name, pw) VALUES ("${email}", "${name}", "${password}")`, function (err, rows) {
+    if (err) throw err;
+    console.log('OK DB INSERTED');
+  })
+})
+
 
 module.exports = router;
