@@ -24,12 +24,22 @@ router.post('/', function (req, res) {
   const body = req.body;
   const email = body.email;
   const name = body.name;
-  const password = body.password;
-  console.log(email, name, password);
+  const pw = body.password;
 
-  const query = connection.query(`INSERT INTO user (email, name, pw) VALUES ("${email}", "${name}", "${password}")`, function (err, rows) {
+  const sql = {
+    email,
+    name,
+    pw
+  };
+
+  const query = connection.query(`INSERT INTO user SET ?`, sql, function (err, rows) {
     if (err) throw err;
-    console.log('OK DB INSERTED');
+
+    // ejs template에 객체의 data 넣어서 client로 전송
+    else res.render('welcome.ejs', {
+      name,
+      'id': rows.insertId
+    })
   })
 })
 
