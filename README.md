@@ -39,3 +39,11 @@ Node.js 공부
 
 - Routing을 모듈화해서 분리
 - Express의 Router 사용
+
+#### 19.10.13 (일)
+
+**5. DB에 데이터 추가 : Create User**
+
+- /join으로의 get과 post 요청에 대한 응답 처리
+- 사용자의 입력 정보로 DB에 INSERT query 작성
+- 복잡한 query문을 set을 이용하여 간략히 작성
