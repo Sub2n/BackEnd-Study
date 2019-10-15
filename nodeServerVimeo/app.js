@@ -21,4 +21,13 @@ app.use(bodyParser.urlencoded({
 }))
 app.set('view engine', 'ejs')
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash()) // 메시지를 쉽게 전달해주는 거
+
 app.use(router);

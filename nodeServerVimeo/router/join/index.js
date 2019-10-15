@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const router = express.Router()
 const path = require('path')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 
 // DB 연동
 const mysql = require('mysql')
@@ -21,28 +23,36 @@ router.get('/', function (req, res) {
   res.render('join.ejs');
 })
 
-router.post('/', function (req, res) {
-  const body = req.body;
-  const email = body.email;
-  const name = body.name;
-  const pw = body.password;
+passport.use('local-join', new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'passwd',
+  passRegToCallback: true
+}, function (req, email, password, done) {
+  console.log('local-join callback called')
+}))
 
-  const sql = {
-    email,
-    name,
-    pw
-  };
+// router.post('/', function (req, res) {
+//   const body = req.body;
+//   const email = body.email;
+//   const name = body.name;
+//   const pw = body.password;
 
-  const query = connection.query(`INSERT INTO user SET ?`, sql, function (err, rows) {
-    if (err) throw err;
+//   const sql = {
+//     email,
+//     name,
+//     pw
+//   };
 
-    // ejs template에 객체의 data 넣어서 client로 전송
-    else res.render('welcome.ejs', {
-      name,
-      'id': rows.insertId
-    })
-  })
-})
+//   const query = connection.query(`INSERT INTO user SET ?`, sql, function (err, rows) {
+//     if (err) throw err;
+
+//     // ejs template에 객체의 data 넣어서 client로 전송
+//     else res.render('welcome.ejs', {
+//       name,
+//       'id': rows.insertId
+//     })
+//   })
+// })
 
 
 module.exports = router;
