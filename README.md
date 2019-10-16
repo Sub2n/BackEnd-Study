@@ -47,3 +47,10 @@ Node.js 공부
 - /join으로의 get과 post 요청에 대한 응답 처리
 - 사용자의 입력 정보로 DB에 INSERT query 작성
 - 복잡한 query문을 set을 이용하여 간략히 작성
+
+#### 19.10.15 (화))
+
+**6. passport 기반 인증 로직 구현 (1)**
+
+- passport 환경 구축
+- middleware, strategy 설정
