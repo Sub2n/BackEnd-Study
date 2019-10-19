@@ -18,6 +18,7 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
+// flash로 에러 메시지를 받아서 ejs 렌더링
 router.get('/', function (req, res) {
   let message;
   const errMessage = req.flash('error');
