@@ -19,8 +19,13 @@ const connection = mysql.createConnection({
 connection.connect()
 
 router.get('/', function (req, res) {
-  // res.sendFile(path.join(__dirname, '../../public/join.html'))
-  res.render('join.ejs');
+  let message;
+  const errMessage = req.flash('error');
+  if (errMessage) message = errMessage;
+
+  res.render('join.ejs', {
+    message
+  });
 })
 
 // passport 모듈 local-join 정의
