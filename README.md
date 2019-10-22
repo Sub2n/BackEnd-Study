@@ -55,4 +55,8 @@ Node.js 공부
 - passport 환경 구축
 - middleware, strategy 설정
 
-#### 19.10.20
+### 19.10.20 (일)
+
+**6. passport 기반 인증 로직 구현 (2)**
+
+- passport 기반 router 설정
