@@ -45,7 +45,18 @@ passport.use('local-join', new LocalStrategy({
         message: 'Your Email is Already Used'
       })
     } else {
+      const sql = {
+        email,
+        pw: password
+      };
+      const query = connection.query('insert into user set ?', sql, function (err, rows) {
+        if (err) throw err;
 
+        return done(null, {
+          email,
+          'id': rows.insertId
+        })
+      })
     }
   })
 }))
