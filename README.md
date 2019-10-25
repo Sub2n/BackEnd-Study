@@ -60,3 +60,12 @@ Node.js 공부
 **6. passport 기반 인증 로직 구현 (2)**
 
 - passport 기반 router 설정
+- /join으로 post routing 처리 (post 요청시 passport 모듈의 local-join이라는 local-strategy로 인증하도록 함)
+
+### 19.10.25 (금)
+
+**6. passport 기반 인증 로직 구현 (3)**
+
+- local-strategy 콜백 완성
+- DB에 사용자가 입력한 이메일이 존재하는지 여부 확인하고 성공/실패시 메시지 전달
+- 메시지 전달에 flash 사용
