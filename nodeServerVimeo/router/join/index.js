@@ -27,9 +27,9 @@ router.get('/', function (req, res) {
 passport.use('local-join', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passRegToCallback: true
+  passReqToCallback: true
 }, function (req, email, password, done) {
-  const query = connection.query('SELECT * FROM USER WHERE EMAIL=?', [email], function (err, row) {
+  const query = connection.query('select * from user where email=?', [email], function (err, row) {
     if (err) return done(err);
 
     if (row.length) {
