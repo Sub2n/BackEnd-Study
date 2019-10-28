@@ -23,12 +23,20 @@ router.get('/', function (req, res) {
   res.render('join.ejs');
 })
 
+// passport 모듈 local-join 정의
 passport.use('local-join', new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'passwd',
+  passwordField: 'password',
   passRegToCallback: true
 }, function (req, email, password, done) {
   console.log('local-join callback called')
+}))
+
+// join으로 post요청 오면 local-join으로 넘기는 routing 처리
+router.post('/', passport.authenticate('local-join', {
+  successRedirect: '/main',
+  failureRedirect: '/join',
+  failureFlash: true
 }))
 
 // router.post('/', function (req, res) {
