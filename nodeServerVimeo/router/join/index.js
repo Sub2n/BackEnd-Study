@@ -34,7 +34,7 @@ passport.use('local-join', new LocalStrategy({
 
     if (row.length) {
       // 처리 결과가 있으면
-      console.log('exised user')
+      console.log('exist user')
       // done false 넘기면 failureRedirect로
       return done(null, false, {
         message: 'Your Email is Already Used'
