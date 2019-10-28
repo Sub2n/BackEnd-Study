@@ -29,7 +29,20 @@ passport.use('local-join', new LocalStrategy({
   passwordField: 'password',
   passRegToCallback: true
 }, function (req, email, password, done) {
-  console.log('local-join callback called')
+  const query = connection.query('SELECT * FROM USER WHERE EMAIL=?', [email], function (err, row) {
+    if (err) return done(err);
+
+    if (row.length) {
+      // 처리 결과가 있으면
+      console.log('exised user')
+      // done false 넘기면 failureRedirect로
+      return done(null, false, {
+        message: 'Your Email is Already Used'
+      })
+    } else {
+
+    }
+  })
 }))
 
 // join으로 post요청 오면 local-join으로 넘기는 routing 처리
